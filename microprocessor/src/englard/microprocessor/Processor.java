@@ -7,6 +7,7 @@ public class Processor {
 	private Acumulator a;
 	private Acumulator b;
 	private Memory memory;
+	int test = 0;
 
 	/*
 	 * @param fileName pass in the file with the instuction set and memory
@@ -16,7 +17,7 @@ public class Processor {
 		a = new Acumulator();
 		b = new Acumulator();
 		memory = new Memory(fileName);
-		
+
 	}
 
 	private void followInstuctionSet() {
@@ -33,7 +34,7 @@ public class Processor {
 				amount = 3;
 				hexRegistor = (memory.getMemoryAtPosition(i + 1).getHexValue() + memory
 						.getMemoryAtPosition(i + 2).getHexValue());
-				memPos = Integer.valueOf(hexRegistor,16);
+				memPos = Integer.valueOf(hexRegistor, 16);
 				a.setValue(memory.getMemoryAtPosition(memPos));
 				break;
 			case 1:
@@ -41,21 +42,20 @@ public class Processor {
 				amount = 3;
 				hexRegistor = (memory.getMemoryAtPosition(i + 1).toString() + memory
 						.getMemoryAtPosition(i + 2).toString());
-				memPos = Integer.valueOf(hexRegistor,16);
-				memory.setMemoryAtPosition(memPos, a.getValue());
+				memPos = Integer.valueOf(hexRegistor, 16);
+				memory.setMemoryAtPosition(memPos, a.getWord());
 				break;
 			case 2:
 				// swap values in Acumulator a and b
 				amount = 1;
-				Word temp = a.getValue();
-				a.setValue(b.getValue());
+				Word temp = a.getWord();
+				a.setValue(b.getWord());
 				b.setValue(temp);
 				break;
 			case 3:
 				// add a and b - low word in a high word in b
 				amount = 1;
-				int decSum = (a.getValue().getDecimalValue() + b.getValue()
-						.getDecimalValue());
+				int decSum = (a.getDecimalValue() + b.getDecimalValue());
 				Address sumAddress = new Address(decSum);
 
 				// split into two units the first in A the second in B
@@ -64,58 +64,63 @@ public class Processor {
 				break;
 			case 4:
 				amount = 1;
-				int value = a.getValue().getDecimalValue() + 1;
-				if (value == 16) {
+				int value = a.getDecimalValue();
+				if (value == 15) {
 					value = 0;
 				}
-				a.setValue(value);
+				a.setValue(value+1);
 				break;
 			case 5:
 				amount = 1;
-				value = a.getValue().getDecimalValue() - 1;
+				value = a.getDecimalValue();
 				if (value == 0) {
 					value = 15;
 				}
-				a.setValue(value);
+				a.setValue(value-1);
 				break;
 			case 6:
 				amount = 3;
-				if (a.getValue().getDecimalValue() == 0) {
+				if (a.getDecimalValue() == 0) {
 					// next command to be executed is location specified by
 					// argument
 					hexRegistor = (memory.getMemoryAtPosition(i + 1).toString() + memory
 							.getMemoryAtPosition(i + 2).toString());
-					memPos = Integer.valueOf(hexRegistor,16);
+					memPos = Integer.valueOf(hexRegistor, 16);
 					i = memPos; // jump to commad specified
 
 				}
 				break;
 			case 7:
+				if (test++ == 2) {
+					System.out.println(memory);
+				}
+				System.out.println("\n" + memory);
+
 				amount = 3;
 				// next command to be executed is location specified by
 				// argument
 				hexRegistor = (memory.getMemoryAtPosition(i + 1).toString() + memory
 						.getMemoryAtPosition(i + 2).toString());
-				memPos = Integer.valueOf(hexRegistor,16);
-				i = memPos; // jump to commad specified
+				memPos = Integer.valueOf(hexRegistor, 16);
+				i = memPos; // jump to command specified
 
 				break;
 			case 8:
-				amount= 256;
+				amount = 256;
 				break;
 
 			}
 		}
 	}
-	
-	public static void main(String[] args) throws IOException{
-		
+
+	public static void main(String[] args) throws IOException {
+
 		Processor p = new Processor("memory.txt");
 		System.out.print(p.memory);
 		p.followInstuctionSet();
 		System.out.println();
 		System.out.print(p.memory);
-		
+
 	}
 
 }

@@ -11,7 +11,11 @@ public class Acumulator {
 		value = new Word(0);
 	}
 
-	public Word getValue() {
+	public int getDecimalValue() {
+		return this.value.getDecimalValue();
+	}
+	
+	public Word getWord(){
 		return this.value;
 	}
 

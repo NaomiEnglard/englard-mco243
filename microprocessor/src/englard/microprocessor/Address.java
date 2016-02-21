@@ -16,14 +16,14 @@ public class Address {
 	 */
 	public Address(int decSum) {
 		String hexSum = Integer.toHexString(decSum);
-		if (decSum > 10) {
+		if (decSum >= 16) {
 
-			one = new Word(String.valueOf(hexSum.charAt(0)));
-			two = new Word(String.valueOf(hexSum.charAt(1)));
+			one = new Word(String.valueOf(hexSum.charAt(1)));
+			two = new Word(String.valueOf(hexSum.charAt(0)));
 
 		} else {
-			one = new Word(0);
-			two = new Word(String.valueOf(hexSum.charAt(0)));
+			one = new Word(String.valueOf(hexSum.charAt(0)));
+			two = new Word(0);
 		}
 	}
 
