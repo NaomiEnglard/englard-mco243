@@ -66,17 +66,20 @@ public class Processor {
 				amount = 1;
 				int value = a.getDecimalValue();
 				if (value == 15) {
-					value = 0;
+					a.setValue(0);
+				} else {
+					a.setValue((value + 1));
 				}
-				a.setValue(value+1);
 				break;
 			case 5:
 				amount = 1;
 				value = a.getDecimalValue();
 				if (value == 0) {
-					value = 15;
+					a.setValue(15);
+
+				} else {
+					a.setValue((value - 1));
 				}
-				a.setValue(value-1);
 				break;
 			case 6:
 				amount = 3;
@@ -91,12 +94,8 @@ public class Processor {
 				}
 				break;
 			case 7:
-				if (test++ == 2) {
-					System.out.println(memory);
-				}
-				System.out.println("\n" + memory);
 
-				amount = 3;
+				amount = 0;
 				// next command to be executed is location specified by
 				// argument
 				hexRegistor = (memory.getMemoryAtPosition(i + 1).toString() + memory
