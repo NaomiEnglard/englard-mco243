@@ -1,7 +1,5 @@
 package englard.microprocessor;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class Memory {
@@ -9,18 +7,9 @@ public class Memory {
 	// private Word[] memory;
 	private Word[] memory;
 
-	public Memory(String memoryFileName) throws IOException {
+	public Memory(String memoryLine) throws IOException {
 		memory = new Word[256];
-		readInInitialMemory(memoryFileName);
-	}
-
-	private void readInInitialMemory(String fileName) throws IOException {
-		BufferedReader in = new BufferedReader(new FileReader(fileName));
-		char[] readInChar = new char[256];
-		in.read(readInChar);
-		in.close();
-		convertCharArrayToWordArray(readInChar);
-
+		convertCharArrayToWordArray(memoryLine.toCharArray());
 	}
 
 	private void convertCharArrayToWordArray(char[] readInChar) {
