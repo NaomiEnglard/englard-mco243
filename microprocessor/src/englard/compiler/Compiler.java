@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
-import org.junit.Test;
 
 public class Compiler {
 
@@ -58,7 +57,7 @@ public class Compiler {
 
 	}
 
-	@Test
+	
 	public String getHexCommnad() {
 		return output.toString();
 	}
