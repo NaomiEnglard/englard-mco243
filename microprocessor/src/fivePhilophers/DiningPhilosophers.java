@@ -19,13 +19,13 @@ public class DiningPhilosophers {
 		allForks.add(f3);
 		allForks.add(f4);
 		allForks.add(f5);
-		 AtomicInteger numForksOnTable = new AtomicInteger(5);
-
-		Philosopher a = new Philosopher("A", f1, f2, numForksOnTable);
-		Philosopher b = new Philosopher("B", f2, f3, numForksOnTable);
-		Philosopher c = new Philosopher("C", f3, f4, numForksOnTable);
-		Philosopher d = new Philosopher("D", f4, f5, numForksOnTable);
-		Philosopher e = new Philosopher("E", f5, f1, numForksOnTable);
+		AtomicInteger numForksOnTable = new AtomicInteger(5);
+		Waitor waiter = new Waitor();
+		Philosopher a = new Philosopher("A", f1, f2, numForksOnTable, waiter);
+		Philosopher b = new Philosopher("B", f2, f3, numForksOnTable, waiter);
+		Philosopher c = new Philosopher("C", f3, f4, numForksOnTable, waiter);
+		Philosopher d = new Philosopher("D", f4, f5, numForksOnTable, waiter);
+		Philosopher e = new Philosopher("E", f5, f1, numForksOnTable, waiter);
 
 		a.start();
 		b.start();

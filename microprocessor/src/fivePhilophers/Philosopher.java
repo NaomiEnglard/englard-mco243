@@ -10,14 +10,16 @@ public class Philosopher extends Thread {
 
 	private String name;
 	private AtomicInteger forks;
+	private Waitor waitor;
 	//private LinkedBlockingQueue<Fork> forks;
 
 	public Philosopher(String name, Fork f1, Fork f2,
-			AtomicInteger forksOnTable) {
+			AtomicInteger forksOnTable, Waitor waitor) {
 		this.forks = forksOnTable;
 		this.name = name;
 		this.f1 = f1;
 		this.f2 = f2;
+		this.waitor	 = waitor;
 	}
 
 	public void run() {
@@ -30,11 +32,20 @@ public class Philosopher extends Thread {
 	public void eat() {
 		System.out.println(this + " trying to pick up  " + f1);
 		// if (f1.onTable() && f2.onTable()) {
+		
 		while (!(forks.get() > 1)) {
 			System.out.println("waiting for a fork and thinking");
 			think();
 		}
-		synchronized (f1) {
+		if(waitor.tryToEat(f1, f2)){
+		
+			waitForAFewSeconds(5);
+			
+			
+		}
+			
+		
+		/*synchronized (f1) {
 		//	System.out.println(forks.remove(f1));
 			forks.decrementAndGet();
 			waitForAFewSeconds(5);
@@ -49,7 +60,7 @@ public class Philosopher extends Thread {
 
 		}
 		System.out.println(this + " put down " + f2);
-		forks.incrementAndGet();
+		forks.incrementAndGet();*/
 		// }
 	}
 

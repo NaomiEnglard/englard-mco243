@@ -1,15 +1,17 @@
 package fivePhilophers;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 
 
 public class Fork {
 	
 	private int number;
-	//private AtomicBoolean onTable;
+	private AtomicBoolean onTable;
 
 	public Fork(int number) {
 		this.number = number;
-		//onTable = new AtomicBoolean(true);
+		onTable = new AtomicBoolean(true);
 	}
 
 	@Override
@@ -39,13 +41,13 @@ public class Fork {
 		return true;
 	}
 	
-	/*
+	
 	public boolean onTable(){
 		return onTable.get();
 	}
 	public void pickedUp(){
 		onTable.set(false);
 	}
-	*/
+	
 	
 }
