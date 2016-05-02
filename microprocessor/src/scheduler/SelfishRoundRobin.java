@@ -34,6 +34,7 @@ public class SelfishRoundRobin extends Scheduler {
 				holding.add(j);
 			}
 		}
+		this.jobs = active;
 	}
 
 	@Override
@@ -75,18 +76,6 @@ public class SelfishRoundRobin extends Scheduler {
 
 	}
 
-	public static void main(String[] args) {
-		ArrayList<Job> jobs = new ArrayList<Job>();
-		jobs.add(new Job("1", Priority.High, JobType.Computed, 100));
-		jobs.add(new Job("2", Priority.Meduim, JobType.Computed, 100));
-		jobs.add(new Job("3", Priority.Low, JobType.Computed, 50));
-		jobs.add(new Job("4", Priority.Low, JobType.Computed, 200));
-		jobs.add(new Job("5", Priority.Low, JobType.IO, 100));
-		Comparator<Job> c = new PriorityCamparator();
-		SelfishRoundRobin s = new SelfishRoundRobin(jobs, c);
-		s.run();
-		System.out.println("Completed it took " + s.totalTime);
-
-	}
+	
 
 }

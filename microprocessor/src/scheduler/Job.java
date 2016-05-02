@@ -1,5 +1,7 @@
 package scheduler;
 
+import java.util.Date;
+
 public class Job {
 
 	private Priority priority;
@@ -9,14 +11,25 @@ public class Job {
 	private State state;
 	private int timeLeft;
 	private JobType type;
+	private Date deadLine;
 
-	public Job( String name,Priority priority,  JobType type, int timeLeft) {
+	public Job(String name, Priority priority, JobType type, int timeLeft,
+			Date deadLine) {
 		super();
 		this.priority = priority;
 		this.name = name;
 		this.timeLeft = timeLeft;
 		this.type = type;
+		this.deadLine = deadLine;
 
+	}
+
+	public Date getDeadLine() {
+		return deadLine;
+	}
+
+	public void setDeadLine(Date deadLine) {
+		this.deadLine = deadLine;
 	}
 
 	public JobType getType() {

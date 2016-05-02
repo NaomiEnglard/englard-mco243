@@ -30,16 +30,4 @@ public class RoundRobinScheduler extends Scheduler {
 		}
 
 	}
-	public static void main(String[] args) {
-		ArrayList<Job> jobs = new ArrayList<Job>();
-		jobs.add(new Job("1", Priority.High,JobType.Computed, 100));
-		jobs.add(new Job("2", Priority.Meduim,JobType.Computed, 100));
-		jobs.add(new Job("3", Priority.Low,	JobType.Computed, 50));
-		jobs.add(new Job("4", Priority.High,JobType.Computed, 200));
-		jobs.add(new Job("5", Priority.High, JobType.IO,100));
-		RoundRobinScheduler s = new RoundRobinScheduler(jobs);
-		s.run();
-		System.out.println("Completed it took " + s.totalTime);
-
-	}
 }
